@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Add Staff</title>
+  </head>
+  <body>
+    <h1>Add Staff</h1>
+    <form action="{{ url_for('add_staff') }}" method="post">
+      <label for="ign">IGN:</label>
+      <input type="text" id="ign" name="ign" required>
+      <br>
+      <label for="rank">Rank:</label>
+      <input type="text" id="rank" name="rank" required>
+      <br>
+      <input type="submit" value="Add Staff">
+    </form>
+    <p><a href="{{ url_for('index') }}">Back to the list</a></p>
+  </body>
+</html>

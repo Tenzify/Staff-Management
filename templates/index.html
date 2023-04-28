@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battle Network - Staff List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="mt-5">Staff Management</h2>
+
+    <div class="row mt-4">
+        <div class="col">
+            <form id="add-staff-form" method="POST">
+                <div class="form-group">
+                    <label for="ign">IGN</label>
+                    <input type="text" class="form-control" id="ign" name="ign" placeholder="In-game name" required>
+                </div>
+                <div class="form-group">
+                    <label for="rank">Rank</label>
+                    <select class="form-control" id="rank" name="rank" required>
+                        <option value="Trial Mod">Trial Mod</option>
+                        <option value="Mod">Mod</option>
+                        <option value="Sr. Mod">Sr. Mod</option>
+                        <option value="JrAdmin">JrAdmin</option>
+                        <option value="Admin">Admin</option>
+                        <option value="SrAdmin">SrAdmin</option>
+                        <option value="Platform Admin">Platform Admin</option>
+                        <option value="Coordinator">Coordinator</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Staff</button>
+            </form>            
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>IGN</th>
+                        <th>Rank</th>
+                        <th>Last Promotion</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for staff in staff %}
+                    <tr data-id="{{ staff[0] }}">
+                        <td>{{ staff.ign }}</td>
+                        <td>{{ staff.rank }}</td>
+                        <td class="last-promotion">{{ staff.last_promotion }}</td>
+                        <td>
+                            <button class="btn btn-success promote-button" data-id="{{ staff[0] }}" data-rank="{{ staff[2] }}">Promote</button>
+                            <button class="btn btn-warning demote-button" data-id="{{ staff[0] }}" data-rank="{{ staff[2] }}">Demote</button>
+                            <button class="btn btn-danger delete-button" data-id="{{ staff[0] }}">Exel</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
